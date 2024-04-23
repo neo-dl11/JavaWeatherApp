@@ -1,0 +1,42 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'application'
+}
+
+application {
+    mainClass = 'com.neo.weatherapp.WeatherApp'
+}
+
+repositories {
+    mavenCentral()  
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.9'  
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.1')  
+}
+
+group = 'com.neo.weatherapp'
+version = '1.0-SNAPSHOT'
+description = 'WeatherApp'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()  
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
